@@ -1,0 +1,54 @@
+plugins {
+    id 'fabric-loom' version '0.10-SNAPSHOT'
+}
+
+repositories {
+}
+
+dependencies {
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    compileOnly project(":common")
+}
+
+loom {
+    runs {
+        client {
+            client()
+            setConfigName("Fabric Client")
+            ideConfigGenerated(true)
+            runDir("./run")
+        }
+        server {
+            server()
+            setConfigName("Fabric Server")
+            ideConfigGenerated(true)
+            runDir("./run")
+        }
+    }
+}
+
+processResources {
+    from project(":common").sourceSets.main.resources
+    inputs.property "version", rootProject.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": rootProject.version
+    }
+}
+
+tasks.withType(JavaCompile) {
+    source(project(":common").sourceSets.main.allSource)
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${rootProject.archivesBaseName}"}
+    }
+}

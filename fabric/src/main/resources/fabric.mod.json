@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "template",
+  "version": "${version}",
+
+  "name": "Template",
+  "description": "A template multiplatform mod.",
+  "authors": [
+    "samo_lego"
+  ],
+  "contact": {
+    "homepage": "https://samolego.github.io/Template",
+    "sources": "https://github.com/samolego/Template"
+  },
+  "license": "CC0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "org.samo_lego.template.fabric.TemplateFabric"
+    ]
+  },
+  "mixins": [
+    "template.mixins.json",
+    "template.fabric.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*"
+  }
+}

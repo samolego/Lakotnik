@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.samo_lego.template.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+  ],
+  "client": [
+    "CommonMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

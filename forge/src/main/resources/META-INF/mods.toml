@@ -1,0 +1,29 @@
+modLoader = "javafml"
+loaderVersion = "[37,)"
+issueTrackerURL = "https://github.com/samolego/MultiLoaderTemplate/issues"
+license = "CC0-1.0.0"
+
+[[mods]]
+modId = "template"
+version = "${file.jarVersion}"
+displayName = "template"
+displayURL="https://github.com/samolego/MultiLoaderTemplate"
+authors = "samo_lego"
+description = '''
+Template for mods.
+'''
+#logoFile = "template_icon.png"
+
+[[dependencies.template]]
+modId = "forge"
+mandatory = true
+versionRange = "[38,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.template]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18,)"
+ordering = "NONE"
+side = "BOTH"
