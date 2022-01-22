@@ -1,7 +1,7 @@
-package org.samo_lego.template.sponge;
+package org.samo_lego.lakotnik.sponge;
 
 import net.minecraft.server.level.ServerPlayer;
-import org.samo_lego.template.platform_specific.Platform;
+import org.samo_lego.lakotnik.platform_specific.Platform;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.plugin.PluginContainer;

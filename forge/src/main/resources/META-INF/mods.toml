@@ -1,27 +1,27 @@
 modLoader = "javafml"
 loaderVersion = "[37,)"
-issueTrackerURL = "https://github.com/samolego/MultiLoaderTemplate/issues"
-license = "CC0-1.0.0"
+issueTrackerURL = "https://github.com/samolego/Lakotnik/issues"
+license = "MIT"
 
 [[mods]]
-modId = "template"
-version = "${file.jarVersion}"
-displayName = "template"
-displayURL="https://github.com/samolego/MultiLoaderTemplate"
+modId = "lakotnik"
+version = "${version}"
+displayName = "Lakotnik - Hunger Preview"
+displayURL="https://github.com/samolego/Lakotnik"
 authors = "samo_lego"
 description = '''
-Template for mods.
+Serverside hunger preview mod.
 '''
 #logoFile = "template_icon.png"
 
-[[dependencies.template]]
+[[dependencies.lakotnik]]
 modId = "forge"
 mandatory = true
 versionRange = "[38,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.template]]
+[[dependencies.lakotnik]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.18,)"

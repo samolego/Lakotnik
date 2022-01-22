@@ -1,10 +1,9 @@
+import org.spongepowered.gradle.plugin.config.PluginLoaders
 import org.spongepowered.gradle.vanilla.repository.MinecraftPlatform
 
 plugins {
-    id("org.spongepowered.gradle.vanilla") version "0.2.1-SNAPSHOT"
-}
-
-repositories {
+    id "org.spongepowered.gradle.vanilla"
+    id "org.spongepowered.gradle.plugin" version "2.0.0"
 }
 
 dependencies {
@@ -13,48 +12,31 @@ dependencies {
 
     // It doesn't want to compile without this
     testCompileOnly("org.spongepowered:mixin:0.8.3-SNAPSHOT")
-
-    compileOnly project(":common")
 }
 
 minecraft {
     version(rootProject.minecraft_version)
     platform(MinecraftPlatform.JOINED)
-
-    runs {
-        server()
-        client()
-    }
 }
 
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : rootProject.mod_name,
-                "Specification-Vendor"    : "",
-                "Specification-Version"   : rootProject.mod_version,
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "",
-                "MixinConfigs"            : "${rootProject.mod_name}.mixins.json",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+
+sponge {
+    apiVersion("9.0.0-SNAPSHOT")
+    license("MIT")
+    loader {
+        name(PluginLoaders.JAVA_PLAIN)
+        version("1.0")
     }
-}
-
-processResources {
-    from project(":common").sourceSets.main.resources
-    inputs.property "version", rootProject.version
-    inputs.property "mod_name", rootProject.mod_name
-
-    filesMatching("plugins.json") {
-        expand(
-            "version": rootProject.version,
-            "mod_name": rootProject.mod_name
-        )
+    plugin("lakotnik") {
+        displayName("Lakotnik - Hunger Preview")
+        entrypoint("org.samo_lego.lakotnik.sponge.LakotnikSponge")
+        description("Serverside hunger preview mod.")
+        contributor("samo_lego") {
+            description("Lead Developer")
+        }
+        dependency("spongeapi") {
+            loadOrder(PluginDependency.LoadOrder.AFTER)
+            optional(false)
+        }
     }
-}
-
-tasks.withType(JavaCompile) {
-    source(project(":common").sourceSets.main.allSource)
 }

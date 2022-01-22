@@ -1,4 +1,4 @@
-package org.samo_lego.template.platform_specific;
+package org.samo_lego.lakotnik.platform_specific;
 
 import net.minecraft.server.level.ServerPlayer;
 
@@ -41,7 +41,6 @@ public abstract class Platform {
     public boolean hasPermission(ServerPlayer player, String permission) {
         return false;
     }
-
 
     public enum Environment {
         FABRIC,

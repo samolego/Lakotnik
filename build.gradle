@@ -1,7 +1,17 @@
+plugins {
+    id "org.spongepowered.gradle.vanilla" version "0.2.1-SNAPSHOT" apply false
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "https://repo.spongepowered.org/repository/maven-public/"
+    }
+}
+
 allprojects {
     apply plugin: "java"
     apply plugin: "maven-publish"
-    //apply plugin: "com.github.johnrengelman.shadow"
 
     // Forge needs this
     java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -13,15 +23,49 @@ allprojects {
     repositories {
         mavenCentral()
         maven {
+            url 'https://jitpack.io'
+        }
+        maven {
             url = "https://repo.spongepowered.org/repository/maven-public/"
+        }
+
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+
+        def javaTarget = 17;
+        options.release = javaTarget
+
+        sourceCompatibility = JavaVersion.toVersion(javaTarget)
+        targetCompatibility = JavaVersion.toVersion(javaTarget)
+        if (JavaVersion.current() < JavaVersion.toVersion(javaTarget)) {
+            toolchain.languageVersion.set(JavaLanguageVersion.of(javaTarget))
         }
     }
 
-    // configure the maven publication
+    jar {
+        from("LICENSE") {
+            rename { "${it}_${project.archivesBaseName}" }
+        }
+        manifest {
+            attributes([
+                    "Specification-Title"     : rootProject.mod_name,
+                    "Specification-Vendor"    : "",
+                    "Specification-Version"   : rootProject.mod_version,
+                    "Implementation-Title"    : project.name,
+                    "Implementation-Version"  : project.jar.archiveVersion,
+                    "Implementation-Vendor"   : "",
+                    "MixinConfigs"            : "${rootProject.mod_name}.mixins.json",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            ])
+        }
+    }
+
     publishing {
         publications {
             mavenJava(MavenPublication) {
-                artifactId = rootProject.mod_name + "-" + project.name
+                artifactId = rootProject.maven_group + "-" + project.name
                 from components.java
             }
         }
@@ -32,6 +76,23 @@ allprojects {
             // Notice: This block does NOT have the same function as the block in the top level.
             // The repositories here will be used for publishing your artifact, not for
             // retrieving dependencies.
+        }
+    }
+}
+
+subprojects {
+    if (it.name != "common") {
+
+        dependencies {
+            compileOnly project(":common")
+        }
+
+        processResources {
+            from project(":common").sourceSets.main.resources
+        }
+
+        tasks.withType(JavaCompile) {
+            source(project(":common").sourceSets.main.allSource)
         }
     }
 }

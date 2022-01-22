@@ -10,3 +10,5 @@ build/
 forge/run/
 sponge/run/
 fabric/run/
+.run/
+run/

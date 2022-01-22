@@ -1,12 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.samo_lego.template.forge.mixin",
+  "package": "org.samo_lego.lakotnik.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-  ],
-  "client": [
-    "SampleMixin"
+    "ServerPlayerMixin_HungerPreview"
   ],
   "injectors": {
     "defaultRequire": 1

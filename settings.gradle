@@ -1,6 +1,7 @@
 pluginManagement {
     repositories {
         maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
         maven { url "https://files.minecraftforge.net/maven/" }
         maven { url 'https://maven.minecraftforge.net' }
         maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
@@ -13,4 +14,4 @@ include("fabric")
 include("forge")
 include("sponge")
 
-rootProject.name = 'MultiLoaderTemplate'
+rootProject.name = 'Lakotnik'
