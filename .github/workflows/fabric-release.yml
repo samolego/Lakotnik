@@ -1,0 +1,41 @@
+# Taken from Leuokcyte (https://github.com/NucleoidMC/leukocyte/blob/main/.github/workflows/release.yml)
+
+name: Fabric Release
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/loom-cache
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build
+        run: ./gradlew fabric:build
+
+      - name: Upload GitHub release
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: 'fabric/build/libs/*.jar;!fabric/build/libs/*-sources.jar;!fabric/build/libs/*-dev.jar'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
