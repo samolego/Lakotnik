@@ -1,4 +1,4 @@
-# Lakotnik
+# Lakotnik - Hunger Preview
 A hunger preview mod for Minecraft, working serverside only.
 
 ![](https://img.shields.io/badge/Environment-server-green?style=flat-square)
