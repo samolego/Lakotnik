@@ -34,9 +34,5 @@ sponge {
         contributor("samo_lego") {
             description("Lead Developer")
         }
-        dependency("spongeapi") {
-            loadOrder(PluginDependency.LoadOrder.AFTER)
-            optional(false)
-        }
     }
 }
