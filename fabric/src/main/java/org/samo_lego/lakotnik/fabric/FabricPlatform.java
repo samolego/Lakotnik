@@ -7,6 +7,8 @@ import org.samo_lego.lakotnik.platform_specific.Platform;
 
 import java.nio.file.Path;
 
+import static org.samo_lego.lakotnik.Lakotnik.MOD_ID;
+
 public class FabricPlatform extends Platform {
 
     public FabricPlatform() {
@@ -14,8 +16,8 @@ public class FabricPlatform extends Platform {
     }
 
     @Override
-    public Path getConfigDirectory() {
-        return FabricLoader.getInstance().getConfigDir();
+    public Path getConfigPath() {
+        return Path.of(FabricLoader.getInstance().getConfigDir() + "/"+ MOD_ID + "/" + this.getConfigName());
     }
 
     @Override

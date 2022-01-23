@@ -22,7 +22,7 @@ public class SpongePlatform extends Platform {
     }
 
     @Override
-    public Path getConfigDirectory() {
+    public Path getConfigPath() {
         return Sponge.configManager().pluginConfig(this.container).configPath();
     }
 }

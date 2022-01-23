@@ -33,6 +33,12 @@ processResources {
     filesMatching("META-INF/mods.toml") {
         expand "version": project.version
     }
+
+    inputs.property "refmap", "lakotnik-${project.name}-${rootProject.minecraft_version}-${project.name}-refmap.json"
+
+    filesMatching("lakotnik.mixins.json") {
+        expand "refmap": "lakotnik-${project.name}-${rootProject.minecraft_version}-${project.name}-refmap.json"
+    }
 }
 
 java {

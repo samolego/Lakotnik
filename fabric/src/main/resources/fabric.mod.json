@@ -13,7 +13,7 @@
     "sources": "https://github.com/samolego/Lakotnik",
     "issues": "https://github.com/samolego/Lakotnik/issues"
   },
-  "license": "CC0",
+  "license": "MIT",
   "environment": "*",
   "entrypoints": {
     "main": [

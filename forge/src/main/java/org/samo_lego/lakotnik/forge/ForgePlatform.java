@@ -6,6 +6,8 @@ import org.samo_lego.lakotnik.platform_specific.Platform;
 
 import java.nio.file.Path;
 
+import static org.samo_lego.lakotnik.Lakotnik.MOD_ID;
+
 public class ForgePlatform extends Platform {
 
     public ForgePlatform() {
@@ -13,8 +15,8 @@ public class ForgePlatform extends Platform {
     }
 
     @Override
-    public Path getConfigDirectory() {
-        return FMLPaths.CONFIGDIR.get();
+    public Path getConfigPath() {
+        return Path.of(FMLPaths.CONFIGDIR.get() + "/" + MOD_ID+ "/" + this.getConfigName());
     }
 
     @Override

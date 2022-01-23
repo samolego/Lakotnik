@@ -4,13 +4,11 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.nio.file.Path;
 
+import static org.samo_lego.lakotnik.Lakotnik.MOD_ID;
+
 public abstract class Platform {
 
     private final Environment environment;
-
-    public Platform() {
-        this(Environment.UNKNOWN);
-    }
 
     public Platform(Environment environment) {
         this.environment = environment;
@@ -28,9 +26,11 @@ public abstract class Platform {
      * Gets config directory path.
      * @return config directory path.
      */
-    public Path getConfigDirectory() {
-        return null;
-    };
+    public abstract Path getConfigPath();
+
+    public String getConfigName() {
+        return MOD_ID + ".toml";
+    }
 
     /**
      * Checks whether player has provided permission.

@@ -1,3 +1,4 @@
+import groovy.json.*
 import org.spongepowered.gradle.plugin.config.PluginLoaders
 import org.spongepowered.gradle.vanilla.repository.MinecraftPlatform
 
@@ -33,6 +34,27 @@ sponge {
         description("Serverside hunger preview mod.")
         contributor("samo_lego") {
             description("Lead Developer")
+        }
+    }
+}
+
+processResources {
+    System.out.println("Processing resources");
+
+    // Remove "refmap" property in lakotnik.mixins.json
+    inputs.property "refmap", "lakotnik-${project.name}-${rootProject.minecraft_version}-${project.name}-refmap.json"
+
+    /*filesMatching("lakotnik.mixins.json") {
+        // remove property "refmap"
+        new JsonSlurper().parseText(it.asFile.readText()).remove("refmap")
+    }*/
+
+    doLast {
+        fileTree(dir: outputs.files.asPath, include: "lakotnik.mixins.json").each { file -> {
+                def mixinJson = new JsonSlurper().parse(file);
+                mixinJson.remove("refmap");
+                return file.text = JsonOutput.toJson(mixinJson);
+            }
         }
     }
 }

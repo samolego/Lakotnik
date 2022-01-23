@@ -14,6 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.BiFunction;
 
+import static org.samo_lego.lakotnik.Lakotnik.getUpdateRate;
+import static org.samo_lego.lakotnik.Lakotnik.lowHungerEnabled;
+
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin_HungerPreview {
 
@@ -27,14 +30,15 @@ public abstract class ServerPlayerMixin_HungerPreview {
 
     @Inject(method = "doTick", at = @At(value = "TAIL"))
     private void onTick(CallbackInfo ci) {
-        if (this.player.tickCount % 10 == 0 &&
+        if (this.player.tickCount % getUpdateRate() == 0 &&
+                this.player.getFoodData().needsFood() &&
                 !this.player.isCreative() &&
                 !this.player.isSpectator() &&
                 permissionCheck.apply(this.player, "lakotnik.hunger_preview")) {
             if (this.foodInfoSent) {
                 this.updateFoodLevel(0);
                 this.foodInfoSent = false;
-            } else {
+            } else if (lowHungerEnabled() || this.player.getFoodData().getFoodLevel() > 6.0f) {
                 final FoodProperties foodProperties = this.player.getMainHandItem().getItem().getFoodProperties();
 
                 if (foodProperties != null) {
