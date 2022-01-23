@@ -16,7 +16,20 @@ https://user-images.githubusercontent.com/34912839/150651145-a100bc11-b36b-4b6f-
 ![](https://img.shields.io/badge/Loader-Sponge-yellow?style=flat-square)
 ![](https://img.shields.io/badge/Loader-Forge-red?style=flat-square)
 
-## Issues
+## Config
+```toml
+#Lakotnik Config
+
+# Update rate in ticks.
+tick_update_rate=10
+
+# Whether to enable on low hunger (<= 6.0)
+# Causes minor problems as client will think it can
+# sprint. If you don't care about that, feel free to enable.
+enable_on_low_hunger=false
+
+```
+*Why can `enable_on_low_hunger` be problematic?*
 Sprinting is managed on client - if you hold a food item in your hand
 and not have enough hunger points to sprint, you will still be able to sprint
 in intervals when your hunger bar is in preview mode.
